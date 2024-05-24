@@ -1,5 +1,7 @@
+//Product form
+
 let products = [];
-let productId = 2;
+let productId = 0;
 // let carts = [];
 
 document.querySelector("#title").addEventListener("submit", function (event) {
@@ -28,11 +30,11 @@ document.querySelector("#title").addEventListener("submit", function (event) {
 
 });
 
-
+//Product Dashboard
 
 function displayUpload(newProduct) {
 	const productList = document.querySelector("#itemBox");
-
+	// const classId = newProduct.id;
 	const productItem = document.createElement("div");
 	productItem.className =
 		"p-4 flex space-x-4";
@@ -40,8 +42,8 @@ function displayUpload(newProduct) {
 	const checkbox = document.createElement("input");
 	checkbox.type = "checkbox";
 	checkbox.className = "form-checkbox accent-pink-600";
-	checkbox.id = newProduct.id;
-	// checkbox.addEventListener("change", updateTotalValue);
+	checkbox.setAttribute("data-id", newProduct.id);
+	
 
 	const img = document.createElement("img");
 	img.src = newProduct.imageUrl;
@@ -67,24 +69,25 @@ function displayUpload(newProduct) {
 	productItem.appendChild(productDetails);
 	
 	productList.appendChild(productItem);
+	
 
 }
 
 
+//Product cart
+
 function addToCart() {
 	
-	const kfc = document.querySelector('#itemBox');
-	const checkboxes = kfc.querySelectorAll('input[type="checkbox"]');
-	// const checkboxId = parseInt(checkbox.getAttribute("data-id"));
-	// const product = products.find((product) => product.id === checkboxId);
+	const productDash = document.querySelector('#itemBox');
+	const checkboxes = productDash.querySelectorAll('input[type="checkbox"]');
     const cart = document.querySelector("#cart");
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
 			const parentLabel = checkbox.parentNode;
 			const clonedNode = parentLabel.cloneNode(true);
 			const listItem = document.createElement('div');
-			const btnDiv = document.getElementById("calButton");
-          		  btnDiv.innerHTML = `<button class="px-2 ml-4 bg-slate-200 rounded-md" id="calPricefinal" onclick="calculateBtn()">Calculate Total price</button>`
+			const calbtnDiv = document.getElementById("calButton");
+          		  calbtnDiv.innerHTML = `<button class="px-2 ml-4 bg-slate-200 rounded-md" id="calPricefinal" onclick="calculateTotalPrice()">Calculate Total price</button>`
 			// const productTitle = document.createElement("h2");
 			// productTitle.className = "font-semibold";
 			// productTitle.textContent = text.id;
@@ -102,10 +105,27 @@ function addToCart() {
 
 
 			cart.appendChild(listItem);
-			cart.appendChild(btnDiv);
-				
+			cart.appendChild(calbtnDiv);		
         }
     });
+}
+
+
+function calculateTotalPrice() {
+    const cart = document.querySelector("#cart");
+    const checkboxes = cart.querySelectorAll('input[type="checkbox"]');
+    let totalPrice = 0;
+
+    checkboxes.forEach(checkbox => {
+        const productId = parseInt(checkbox.getAttribute("data-id"));
+        const product = products.find(p => p.id === productId);
+        if (checkbox.checked) {
+            totalPrice += parseFloat(product.price);
+		}
+		
+    });
+
+    document.querySelector("#totalPrice").textContent = `$${totalPrice.toFixed(2)}`;
 }
 
 
@@ -143,17 +163,9 @@ function addToCart() {
 
 
 
-// toggle add
-// function toggleAdd(event) {
-// 	const checkbox = event.target;
-// 	const uploadId = parseInt(checkbox.getAttribute("data-id"));
-// 	const upload = uploads.find((upload) => upload.id === uploadId);
 
-// 	if (upload) {
-// 		upload.likes = checkbox.checked;
-// 		updateLikeCounter();
-// 	}
-// }
+
+
 
 
 
