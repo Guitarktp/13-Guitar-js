@@ -12,7 +12,7 @@ document.querySelector("#title").addEventListener("submit", function (event) {
     const imageUrl= document.querySelector("#imageUrl").value;
 
 	if (!isImgUrl(imageUrl)) {
-		alert("required jpg,jpeg,png,gif");
+		alert("required jpg,png,gif");
 		return;
 	}
 
@@ -142,7 +142,7 @@ function calculateTotalPrice() {
 
 function isImgUrl(imageUrl) {
 	const input = new URL(imageUrl);
-	return /\.(jpg|jpeg|png|gif)$/.test(input.pathname);
+	return /\.(jpg|png|gif)$/.test(input.pathname);
 }
 
 
