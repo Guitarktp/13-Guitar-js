@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta
+			name="viewport"
+			content="width=device-width, initial-scale=1.0"
+		/>
+		<title>Javascript Assessment</title>
+		<script src="https://cdn.tailwindcss.com"></script>
+	</head>
+	<body class="bg-gray-400 p-6 ">
+		<!-- Product form -->
+		<form 
+			id = 'title'
+			
+		>
+			<h1 class="text-center text-3xl font-bold" >Shopping cart</h1>
+			<h2 class="text-2xl">Add Item for selection</h2>
+
+			<div id= "inputBox" class="flex">
+				<div id="productInput" > 
+					<label for="type">Product Name:</label>
+					<input type="text" id="productName" required>
+				</div>
+
+				<div id="priceInput"> 
+					<label for="type">Price:</label>
+					<input type="value" id="priceAmount" required>
+				</div>
+
+				<div id="imageInput"> 
+					<label for="image">image:</label>
+					<input type="url" id="imageUrl" required>
+				</div>
+				<button type= "submit" id= "createProduct" class="bg-slate-200 rounded-md mx-3.5">
+					Create Product
+				</button>
+			</div>
+		</form>
+
+		<!-- Product dashboard -->
+			<div id="itemBox" class="bg-slate-500 my-8">
+				<div id="item1" class="flex">
+					<div class="flex">
+						<input class="mx-4" type="checkbox" id="select" name="select" value="Product 1">
+						<img class = "object-scale-down h-36 w-36 " 
+						src="https://images.deliveryhero.io/image/fd-th/LH/t5b7-hero.jpg?width=512&height=384&quality=45" 
+						alt="product1">
+						<span class="m-4">
+							<h2 id="testText">Product 1</h2> 
+							<h2>$ 10.00</h2> 
+						</span>
+					</div>
+				</div>
+				<div id="item2" class="flex">
+					<div class="flex">
+						<input class="mx-4" type="checkbox" id="select" name="select" value="Product 2">
+						<img class = "object-scale-down h-36 w-36 " 
+						src="https://tb-static.uber.com/prod/image-proc/processed_images/5c3e89117e503ae58c4aa5dbed6bbd5b/719c6bd2757b08684c0faae44d43159d.jpeg" 
+						alt="product1">
+						<span class="m-4">
+							<h2 id="testText">Product 2</h2> 
+							<h2>$ 10.00</h2> 
+						</span>
+					</div>
+				</div>
+			</div>
+			<button onclick="addToCart()" id= "addProduct" class="bg-slate-200 rounded-md ">
+				Add to cart
+			</button>
+
+
+
+
+
+		<!-- Product Cart -->
+		<div id="cart" class="bg-slate-500 my-8">
+		</div>
+
+
+
+
+
+		<div
+			id="totalPay"
+			class="text-white font-bold mt-4 py-2 text-center text-3xl bg-blue-600"
+		>
+		You have to pay: 0
+		</div>
+			<section
+			id="displaySection"
+			class="mt-6 max-w-md mx-auto space-y-4"
+		></section>
+
+
+		
+		<script src="script.js"></script>
+	</body>
+</html>
+
+
+
+
+
+
+
+
