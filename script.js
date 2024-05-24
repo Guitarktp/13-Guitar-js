@@ -11,6 +11,10 @@ document.querySelector("#title").addEventListener("submit", function (event) {
 	const priceAmount = document.querySelector("#priceAmount").value;
     const imageUrl= document.querySelector("#imageUrl").value;
 
+	if (!isImgUrl(imageUrl)) {
+		alert("required jpg,jpeg,png,gif");
+		return;
+	}
 
     const newProduct = {
 
@@ -26,7 +30,7 @@ document.querySelector("#title").addEventListener("submit", function (event) {
 	displayUpload(newProduct);
 
 
-	// document.getElementById("title").reset();
+	
 
 });
 
@@ -77,17 +81,21 @@ function displayUpload(newProduct) {
 //Product cart
 
 function addToCart() {
-	
+
+	const cart = document.querySelector("#cart");
 	const productDash = document.querySelector('#itemBox');
 	const checkboxes = productDash.querySelectorAll('input[type="checkbox"]');
-    const cart = document.querySelector("#cart");
+    
+	cart.innerHTML = '';
+	
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
 			const parentLabel = checkbox.parentNode;
 			const clonedNode = parentLabel.cloneNode(true);
+			
+
 			const listItem = document.createElement('div');
-			const calbtnDiv = document.getElementById("calButton");
-          		  calbtnDiv.innerHTML = `<button class="px-2 ml-4 bg-slate-200 rounded-md" id="calPricefinal" onclick="calculateTotalPrice()">Calculate Total price</button>`
+			
 			// const productTitle = document.createElement("h2");
 			// productTitle.className = "font-semibold";
 			// productTitle.textContent = text.id;
@@ -105,7 +113,10 @@ function addToCart() {
 
 
 			cart.appendChild(listItem);
-			cart.appendChild(calbtnDiv);		
+			
+			const calbtnDiv = document.createElement('div');
+    		calbtnDiv.innerHTML = `<button class="px-2 ml-4 bg-slate-200 rounded-md" id="calPricefinal" onclick="calculateTotalPrice()">Calculate Total price</button>`
+			cart.appendChild(calbtnDiv);
         }
     });
 }
@@ -126,6 +137,12 @@ function calculateTotalPrice() {
     });
 
     document.querySelector("#totalPrice").textContent = `$${totalPrice.toFixed(2)}`;
+}
+
+
+function isImgUrl(imageUrl) {
+	const input = new URL(imageUrl);
+	return /\.(jpg|jpeg|png|gif)$/.test(input.pathname);
 }
 
 
