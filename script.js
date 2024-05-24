@@ -1,5 +1,5 @@
 let products = [];
-let productId = 1;
+let productId = 2;
 // let carts = [];
 
 document.querySelector("#title").addEventListener("submit", function (event) {
@@ -39,7 +39,8 @@ function displayUpload(newProduct) {
 
 	const checkbox = document.createElement("input");
 	checkbox.type = "checkbox";
-	checkbox.className = "form-checkbox accent-pink-600 ";
+	checkbox.className = "form-checkbox accent-pink-600";
+	checkbox.id = newProduct.id;
 	// checkbox.addEventListener("change", updateTotalValue);
 
 	const img = document.createElement("img");
@@ -71,27 +72,24 @@ function displayUpload(newProduct) {
 
 
 function addToCart() {
+	
 	const kfc = document.querySelector('#itemBox');
 	const checkboxes = kfc.querySelectorAll('input[type="checkbox"]');
+	// const checkboxId = parseInt(checkbox.getAttribute("data-id"));
+	// const product = products.find((product) => product.id === checkboxId);
     const cart = document.querySelector("#cart");
     checkboxes.forEach(checkbox => {
         if (checkbox.checked) {
 			const parentLabel = checkbox.parentNode;
 			const clonedNode = parentLabel.cloneNode(true);
-
+			const listItem = document.createElement('div');
+			const btnDiv = document.getElementById("calButton");
+          		  btnDiv.innerHTML = `<button class="px-2 ml-4 bg-slate-200 rounded-md" id="calPricefinal" onclick="calculateBtn()">Calculate Total price</button>`
 			// const productTitle = document.createElement("h2");
 			// productTitle.className = "font-semibold";
 			// productTitle.textContent = text.id;
-
-			const listItem = document.createElement('div');
-
+			
 			// const productDetails = document.createElement("div")
-
-			
-			
-
-
-			
 			// productTitle.appendChild(clonedNode);
 			// productDetails.appendChild(productTitle);
 
@@ -99,13 +97,21 @@ function addToCart() {
 			
 			// listItem.appendChild(clonedNode);
 			// cart.appendChild(listItem);
-
-			listItem.appendChild(clonedNode);
-			cart.appendChild(listItem);
 			
+			listItem.appendChild(clonedNode);
+
+
+			cart.appendChild(listItem);
+			cart.appendChild(btnDiv);
+				
         }
     });
 }
+
+
+
+
+
 
 
 
